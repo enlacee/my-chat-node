@@ -65,3 +65,6 @@ set to :
 
 
 
+## Image reference
+
+![image app chat](https://github.com/enlacee/my-chat-node/blob/master/docs/my-chat-node.jpg)
