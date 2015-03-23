@@ -1,3 +1,7 @@
+# my-chat-node
+ application create with : nojeJS, Express, socket.io
+ chat basic on Node (conection, TCP and HTTP)
+
 ## Install Express Generator (01) (good)
 Use the application generatot tool, for quickly create a application skeleton.
 
@@ -56,3 +60,6 @@ set to :
         title= title
         link(rel='stylesheet', href='/stylesheets/style.css')
       body!= body
+
+
+
