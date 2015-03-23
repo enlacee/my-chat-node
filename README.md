@@ -8,7 +8,7 @@ Use the application generatot tool, for quickly create a application skeleton.
 
     $ npm install express-generator -g
 
-Display rhe command option with the -h option:
+Display help command option with the -h option:
 
     $ express -h
 
@@ -17,6 +17,7 @@ Create yor app
     $ express myapp
 
 The install dependencies
+
     $ cd myapp
     $ npm install
 
@@ -49,9 +50,6 @@ version recomendada (para esta app)
 
     $ cd myapp
     $ npm install
-
-
-
 
 ### BUG : fix resoult with JADE
 
