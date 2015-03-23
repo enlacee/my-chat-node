@@ -1,4 +1,5 @@
 # my-chat-node
+
  application create with : nojeJS, Express, socket.io
  chat basic on Node (conection, TCP and HTTP)
 
@@ -20,7 +21,8 @@ The install dependencies
     $ npm install
 
 
-## Installing Expres in your app
+## Create App CHAT nodeJS, Expres
+
 First to create a directory
 
     $ mkdir myapp
@@ -40,12 +42,14 @@ version recomendada (para esta app)
 
     npm install --save express@4.10.2
     npm install --save socket.io
+    npm install --save ejs
 
 
-## Installing APP
+## Installing APP in localhost:
 
-    $ cd app
+    $ cd myapp
     $ npm install
+
 
 
 
