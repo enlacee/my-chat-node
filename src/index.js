@@ -20,26 +20,77 @@ app.get('/', function(req, res){
     }
 });
 
-app.get('/chat', function(req, res){
-  res.sendfile('index.html');
-});
 
+
+var users = [];
 io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.broadcast.emit('hi');
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+    // Identify this client
+    /*console.log(socket.handshake.address);
+    console.log(socket.handshake.time);
+    console.log(socket.handshake.headers.referer);
 
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
-  });  
+    console.log(socket.client.conn.id);
+    console.log(socket.client.conn.remoteAddress);
+    */
+    console.log('a user connected ' + socket.nsp.server.address);
+    var userLocal = {
+        id : socket.client.conn.id,
+        name : getNameInUrl(socket.handshake.headers.referer),
+        address : socket.client.conn.remoteAddress
+    };
+    users.push(userLocal);
 
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+        users = deleteUser(userLocal.id, users);
+        socket.broadcast.emit('userAuth', users);
+    });
+
+    socket.on('chat message', function(msg){
+        console.log('message: ' + msg);
+        io.emit('chat message', msg);
+    });
+
+
+    /**
+     * userAuth Listener : send everythings uses
+     */
+     socket.broadcast.emit('userAuth', users);
+     socket.emit('userAuth', users);
 
 });
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+
+
+
+
+
+/***
+* function helper
+*/
+function getNameInUrl(referer)
+{
+    var url = referer;
+    var nameUser = url.substring(url.indexOf('name=')+5);
+    nameUser = nameUser.toLowerCase();
+    nameUser = nameUser.charAt(0).toUpperCase() + nameUser.slice(1);
+
+    return nameUser;
+}
+
+function deleteUser(idUser, arrayUser)
+{
+    arrayUser.forEach(function(element, index, array){
+        if (element.id == idUser) {
+            arrayUser.splice(index, 1); // delete one Item
+            return false;
+        }
+    });
+
+    return arrayUser;
+}
